@@ -5,7 +5,7 @@ using System.Text;
 namespace Core.Utilities.Results
 {
     public class Result : IResult
-    {                    //restultun tek parametreli olan constructur'ına success'i yolla
+    {   //restultun tek parametreli olan constructur'ına success'i yolla
         public Result(bool success, string message):this(success)
         {
             Message = message;

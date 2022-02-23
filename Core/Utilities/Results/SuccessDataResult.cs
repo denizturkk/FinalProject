@@ -20,6 +20,7 @@ namespace Core.Utilities.Results
         }
 
         //return data as default : rare
+        //calıstıgım T nin default'u
         public SuccessDataResult(string message):base(default,true,message)
         {
 
