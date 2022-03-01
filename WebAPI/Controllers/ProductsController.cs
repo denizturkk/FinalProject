@@ -28,7 +28,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("GetAll")]
-        //SWAGGER
+        //SWAGGER--documentation
         public IActionResult Get()
         {
             var result =_productService.GetAll();

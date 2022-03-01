@@ -35,9 +35,9 @@ namespace WebAPI
             //MY NOTES
             //if we dont store the data we can use singleton
             //it creates one new and references it
-            //biri constructor da iproductdal isterse ona productmanager ver
-            services.AddSingleton<IProductService,ProductManager>();
-            services.AddSingleton< IProductDal,EfProductDal>();
+            //biri constructor da iproductdal isterse ona EfProductDal ver
+            //services.AddSingleton<IProductService,ProductManager>();
+            //services.AddSingleton< IProductDal,EfProductDal>();
 
         }
 
