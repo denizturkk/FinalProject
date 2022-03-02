@@ -29,16 +29,9 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
-        public IResult add(Product product)
+        public IResult Add(Product product)
         {
-          var context = new ValidationContext<Product>(product);
-            ProductValidator productValidator = new ProductValidator();
-            var result = productValidator.Validate(context);
-            if (!result.IsValid)
-            {
-                throw new ValidationException(result.Errors);
-            }
-
+        
             _productDal.Add(product);
             
             return new SuccessResult(Messages.ProductAdded);
