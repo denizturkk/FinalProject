@@ -59,7 +59,7 @@ namespace WebAPI.Controllers
         //postmandan angulardan react dan aldıgım urunu koyuyorum
         public IActionResult Post(Product product)
         {
-            var result =_productService.add(product);
+            var result =_productService.Add(product);
             if(result.Success)
             {
                 return Ok(result);
