@@ -12,14 +12,19 @@ using System.Text;
 
 namespace Business.DependencyResolvers.Autofac
 {
+    //Module from autofac
    public class AutofacBusinessModule :Module
     {
-
+        //load func
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ProductManager>().As<IProductService>();
-            builder.RegisterType<EfProductDal>().As<IProductDal>();
-            
+            //equivalant of servcices.AddSingleton()(from ef api)
+            //if program use IProductService then register ProductManager(one instance of ProductMan. (singleInstance()))
+            builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance(); ;
+            builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance(); ;
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

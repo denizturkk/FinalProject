@@ -8,6 +8,7 @@ namespace Business.ValidationRules.FluentValidation
 {
     public class ProductValidator : AbstractValidator<Product>
     {
+        //rules should be inside the ctor
         public ProductValidator()
         {
             RuleFor(p => p.ProductName).NotEmpty();
@@ -16,6 +17,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(p => p.UnitPrice).GreaterThan(0);
             RuleFor(P => P.UnitPrice).GreaterThanOrEqualTo(10).When(p => p.CategoryId == 1);
             RuleFor(p => p.ProductName).Must(StartWithA).WithMessage("products must be started with 'A'");
+            
         }
 
         private bool StartWithA(string arg)
