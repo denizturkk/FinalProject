@@ -1,3 +1,3 @@
 # FinalProject
-OOP w/ N-TierApp
+OOP-AOP w/ N-TierApp
 I am currently working on this project.
