@@ -36,7 +36,7 @@ namespace Core.CrossCuttingConserns.Caching.Microsoft
             return _memoryCache.Get(key);
         }
 
-        public bool isAdd(string key)
+        public bool IsAdd(string key)
         {
             //out _ = I dont want to data(optional(ı konow it from parameters ctr-space))
             //just want to know if the data in the cache or not this is why ı use out _ keyword
