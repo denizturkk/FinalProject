@@ -8,6 +8,7 @@ using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -19,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 
 namespace WebAPI
 {
@@ -35,15 +35,15 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Autofac,Ninject,CastleWindsor,StructureMap,LightInject,DryInject--> IoC Container
-            
+            //AOP
+            //Autofac, Ninject,CastleWindsor, StructureMap, LightInject, DryInject -->IoC Container
+            //AOP
+            //Postsharp
             services.AddControllers();
-            //MY NOTES
-            //if we dont store the data we can use singleton
-            //it creates one new and references it
-            //biri constructor da iproductdal isterse ona EfProductDal ver
             //services.AddSingleton<IProductService,ProductManager>();
-            //services.AddSingleton< IProductDal,EfProductDal>();
+            //services.AddSingleton<IProductDal, EfProductDal>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -62,8 +62,8 @@ namespace WebAPI
                     };
                 });
             ServiceTool.Create(services);
+
         }
-        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -73,19 +73,19 @@ namespace WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            //middle wave
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+            //23.10 dersteyiz
         }
     }
 }
