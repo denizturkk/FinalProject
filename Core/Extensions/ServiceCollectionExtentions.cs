@@ -9,9 +9,9 @@ namespace Core.Extensions
    public static class ServiceCollectionExtentions
     {
         //IServiceCollection  apimizin servis bağımlılıklarını eklediğimiz
-        //servisleri eklediğimiz koleksiyonlar.
-        public static IServiceCollection AddDependencyResolvers
-            (this IServiceCollection serviceCollection,ICoreModule[] modules)
+        //veya butun injectionları topladigimiz merkezi bir modul
+        
+        public static IServiceCollection AddDependencyResolvers(this IServiceCollection serviceCollection,ICoreModule[] modules)
         {
             foreach (var module in modules)
             {
