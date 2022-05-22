@@ -30,6 +30,7 @@ namespace Core.Utilities.Security.JWT
             //TokenOptions section'ını çekip programdaki TokenOptions classındaki
             //proporties e  atar(mapping)
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+           
 
         }
 

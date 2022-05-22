@@ -15,10 +15,10 @@ namespace Core.Aspects.Autofac.Validation
         public ValidationAspect(Type validatorType)
         {
             //IValidator--fluent validation
-            //BANK CORE DEVELOPPERS??
+            //BANK CORE DEVELOPPERS??  
             if (!typeof(IValidator).IsAssignableFrom(validatorType))
             {
-                throw new System.Exception("this is not a validation class ");
+                throw new @System.Exception("this is not a validation class ");
             }
 
             _validatorType = validatorType;
@@ -41,7 +41,7 @@ namespace Core.Aspects.Autofac.Validation
             //this can be more than 1 products
             //TR
             //add fonksiyonundaki dogrulama tipi product oldugu icin metodun icindeki parametrelerde
-            //product u arıyor.birden fazla olabilir
+            //product u arıyor.birden fazla olabilir    
             var entities = invocation.Arguments.Where(t => t.GetType() == entityType);
 
             foreach (var entity in entities)

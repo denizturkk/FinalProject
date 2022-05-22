@@ -42,12 +42,18 @@ namespace WebAPI
             //AOP
             //Postsharp
             services.AddControllers();
+           
+            //xss
+            services.AddCors();
+            
+            
             //services.AddSingleton<IProductService,ProductManager>();
             //services.AddSingleton<IProductDal, EfProductDal>();
 
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+            
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -77,7 +83,12 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            //midleware's
+            //app.ConfigureCustomExceptionMiddleware() written by me.(solution>core>extensions)
+            app.ConfigureCustomExceptionMiddleware();
+           
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -90,7 +101,7 @@ namespace WebAPI
             {
                 endpoints.MapControllers();
             });
-            //23.10 dersteyiz
+            
         }
     }
 }

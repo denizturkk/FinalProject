@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
@@ -27,10 +28,11 @@ namespace WebAPI.Controllers
             _productService = productService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("getall")]
         //SWAGGER--documentation
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
+            Thread.Sleep(1000);
             var result =_productService.GetAll();
             if (result.Success)
             {
@@ -42,8 +44,8 @@ namespace WebAPI.Controllers
         }
 
         //setting names for the multiple operations which is gett
-        [HttpGet("GetById")]
-        public IActionResult Get(int id)
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id)
         {
             var result = _productService.GetById(id);
             if (result.Success)
@@ -53,7 +55,18 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("Add")]
+        [HttpGet("getbycategory")]
+        public IActionResult GetByCategory(int categoryId)
+        {
+            var result = _productService.GetAllByCategoryId(categoryId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("add")]
         
         //want to get a product ? how through parantesis
         //postmandan angulardan react dan aldıgım urunu koyuyorum

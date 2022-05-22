@@ -12,7 +12,7 @@ using Business.Constants;
 //SecuredOperation is FOR JWT
 //authorisation aspects is generally written in business layer because
 //authorisation algortihms can be changed this is why it is written in business
-//not the core layer
+//not in the core layer
 namespace Business.BusinessAspects.Autofac
 {
     public class SecuredOperation : MethodInterception
