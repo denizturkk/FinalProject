@@ -36,7 +36,7 @@ namespace Business.Concrete
             _categoryService = categoryService;
         }
         //autorisation aspects on business is good choice
-        //[SecuredOperation("Product.add,admin")]
+        [SecuredOperation("Product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
@@ -56,7 +56,7 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<Product>> GetAll()
         {
-            if (DateTime.Now.Hour == 20)
+            if (DateTime.Now.Hour == 22)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
