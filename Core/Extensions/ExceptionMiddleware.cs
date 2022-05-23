@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -32,12 +33,25 @@ namespace Core.Extensions
         private Task HandleExceptionAsync(HttpContext httpContext, Exception e)
         {
             httpContext.Response.ContentType = "application/json";
+           //give the status code 500
             httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
             string message = "Internal Server Error";
+            IEnumerable<ValidationFailure> errors;
             if (e.GetType() == typeof(ValidationException))
             {
                 message = e.Message;
+                errors = ((ValidationException) e).Errors;
+                //I changed the status code because if program enter the 'if' statement
+                //this means that error not caused by server error so its bad badrequest
+                httpContext.Response.StatusCode = 400;
+                return httpContext.Response.WriteAsync(new ValidationErrorDetails { 
+                   
+                    StatusCode=400,
+                    Message=message,
+                    Errors=errors
+
+                }.ToString());
             }
 
             return httpContext.Response.WriteAsync(new ErrorDetails
